@@ -1,0 +1,77 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #444;
+}
+
+.shell {
+  display: flex;
+  flex-flow: row wrap;
+  height: 500px;
+  width: 400px;
+  background-color: silver;
+}
+
+.display {
+  position: absolute;
+  height: 100px;
+  width: 240px;
+  margin: 20px 0 0 20px;
+  background-color: azure;
+}
+
+.numbers {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 5px;
+  width: 260px;
+  height: 290px;
+  margin: 180px 0 0 20px;
+}
+
+.numKey {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90px;
+  width: 80px;
+}
+
+.operators {
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  width: 100px;
+}
+
+.deletions {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.clear,
+.backspace {
+  width: 45px;
+}
+
+.operatorKey {
+  display: flex;
+  flex-direction: column;
+}
+
+.addition,
+.enter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+}
