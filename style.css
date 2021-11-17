@@ -16,62 +16,67 @@ body {
 .shell {
   display: flex;
   flex-flow: row wrap;
-  height: 500px;
-  width: 400px;
+  height: 480px;
+  width: 343px;
   background-color: silver;
+  border: solid black 2px;
+  border-radius: 5%;
 }
 
 .display {
   position: absolute;
-  height: 100px;
-  width: 240px;
+  height: 118px;
+  width: 210px;
   margin: 20px 0 0 20px;
   background-color: azure;
+  border-top: cornflowerblue solid 10px;
+  border-left: cornflowerblue solid 7px;
+  border-right: gold solid 3px;
+  border-bottom: black solid 2px;
 }
 
-.numbers {
+.num-pad {
+  position: absolute;
   display: flex;
   flex-flow: row wrap;
   gap: 5px;
   width: 260px;
-  height: 290px;
-  margin: 180px 0 0 20px;
+  height: fit-content;
+  margin: 170px 0 20px 20px;
 }
 
-.numKey {
+.num-pad > * {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 90px;
-  width: 80px;
+  height: 70px;
+  width: 70px;
+  font-size: 24px;
+  border-radius: 10%;
 }
 
 .operators {
   display: flex;
   flex-direction: column;
-  height: 400px;
-  width: 100px;
+  height: fit-content;
+  width: 70px;
+  gap: 5px;
+  /* justify-content: space-between; */
+
+  margin: 20px 20px 20px 255px;
 }
 
-.deletions {
+.operators > * {
   display: flex;
-  justify-content: space-evenly;
-}
-
-.clear,
-.backspace {
-  width: 45px;
-}
-
-.operatorKey {
-  display: flex;
-  flex-direction: column;
-}
-
-.addition,
-.enter {
-  display: flex;
-  align-items: center;
   justify-content: center;
-  height: 100px;
+  align-items: center;
+  height: 70px;
+  width: 70px;
+  font-size: 24px;
+  border-radius: 10%;
+}
+
+.subtraction,
+.addition {
+  font-size: 3;
 }
