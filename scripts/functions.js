@@ -17,7 +17,8 @@ function divison(a, b) {
 }
 
 function refreshDisplay() {
-  if (digits) display.textContent = displayContent;
+  // if (operandPressed) displayContent = '';
+  display.textContent = displayContent;
 
   // Bump content up to prevent overflow.
   digits = displayContent.toString().length;
@@ -28,8 +29,21 @@ function refreshDisplay() {
   }
 }
 
+function calculate() {
+  if (!operandPressed) return;
+  switch (currentOperand) {
+    case 'addition':
+      let product = addition(num1, num2);
+      displayContent = product.toString();
+      refreshDisplay();
+  }
+}
+
 // Governs behavior of numpad buttons.
 function numPadInputs() {
+  // Clear screen if operand has just been pushed.
+  if (operandPressed) refreshDisplay();
+
   // Get class of button clicked on.
   numPad.addEventListener('click', (e) => {
     // Prevent overflow in display area.
@@ -74,7 +88,8 @@ function numPadInputs() {
         value = '.';
         break;
       case 'equals':
-        value = ''; // Calculation function?
+        operandPressed = false;
+        calculate();
         break;
     }
 
@@ -84,7 +99,12 @@ function numPadInputs() {
       displayContent = '';
     }
 
-    displayContent += value;
+    if (operandPressed) {
+      console.log(value);
+      displayContent = value;
+    } else {
+      displayContent += value;
+    }
     refreshDisplay();
   });
 }
@@ -110,19 +130,21 @@ function operandInput() {
       return;
     }
 
-    switch (keyPress) {
-      case 'backspace':
-        break;
-      case 'clear':
-        break;
-      case 'division':
-        break;
-      case 'multiplication':
-        break;
-      case 'subtraction':
-        break;
-      case 'addition':
-        break;
+    // Clear display and reset variables.
+    if (keyPress == 'clear') {
+      num1 = 0;
+      num1 = 0;
+      displayContent = 0;
+      operandPressed = false;
+      refreshDisplay();
+      return;
     }
+
+    // Register operand event.
+    operandPressed = true;
+
+    currentOperand = keyPress;
+
+    num1 = parseFloat(displayContent);
   });
 }

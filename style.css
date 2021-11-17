@@ -4,6 +4,14 @@ body {
   padding: 0;
   height: 100%;
   width: 100%;
+
+  /*disable html selection and grab-hand on cursor*/
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
 }
 
 body {
@@ -108,6 +116,10 @@ body {
   border-radius: 10%;
   color: #fff;
   background-color: #444;
+}
+
+.backspace {
+  font-size: 28px;
 }
 
 .addition,
