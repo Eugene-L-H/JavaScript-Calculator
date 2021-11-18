@@ -38,7 +38,7 @@ function keyboard() {
         return;
       case 'Delete':
         operandHandler('clear');
-        break;
+        return;
       case '1':
         keyPress = 'one';
         break;
