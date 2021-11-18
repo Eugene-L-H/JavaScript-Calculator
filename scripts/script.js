@@ -2,6 +2,8 @@ const display = document.querySelector('.num-display');
 const numPad = document.querySelector('.num-pad');
 const operators = document.querySelector('.operators');
 
+let calcArray = [];
+
 // Float or int total for calcualtion
 let num1 = 0;
 let num2 = 0;
@@ -10,8 +12,12 @@ let currentOperand = '';
 let displayContent = '0';
 let digits = 0;
 
+// Display is cleared on next numpad press when true.
 let operandPressed = false;
+// Used for clearing the screen after operator pushed.
+let digitCount = 0;
 
+// Set initial display value;
 refreshDisplay();
 
 // Register numPad inputs.

@@ -29,6 +29,8 @@ body {
   width: 343px;
   background-color: silver;
   border: solid black 2px;
+  border-left: solid black 3px;
+  border-top: solid black 3px;
   border-radius: 5%;
 }
 

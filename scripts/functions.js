@@ -29,8 +29,8 @@ function refreshDisplay() {
   }
 }
 
+// Perfom calculation when user presses "equals" and display result.
 function calculate() {
-  if (!operandPressed) return;
   switch (currentOperand) {
     case 'addition':
       let product = addition(num1, num2);
@@ -41,13 +41,16 @@ function calculate() {
 
 // Governs behavior of numpad buttons.
 function numPadInputs() {
-  // Clear screen if operand has just been pushed.
-  if (operandPressed) refreshDisplay();
-
   // Get class of button clicked on.
   numPad.addEventListener('click', (e) => {
     // Prevent overflow in display area.
     if (digits == 24) return;
+
+    // Clear screen if operand has just been pushed.
+    if (operandPressed) {
+      refreshDisplay();
+      if (digitCount == 1) operandPressed = false;
+    }
 
     let keyPress = e.path[0].getAttribute('class');
     let value = '';
@@ -84,27 +87,31 @@ function numPadInputs() {
         value = '0';
         break;
       case 'dot':
-        '0';
         value = '.';
         break;
       case 'equals':
         operandPressed = false;
+        num1 = parseFloat(displayContent);
+        calcArray.push(num1);
+        calcArray.push(keyPress);
         calculate();
         break;
     }
 
-    // Clear leading zero if there is one.
-    if (displayContent == '0') {
+    // Clear leading zero if there is one. Prevent
+    if (displayContent == '0' || operandPressed) {
       if (value == '0') return;
       displayContent = '';
     }
 
+    digitCount++;
+
     if (operandPressed) {
-      console.log(value);
       displayContent = value;
     } else {
       displayContent += value;
     }
+    operandPressed = false;
     refreshDisplay();
   });
 }
@@ -136,15 +143,21 @@ function operandInput() {
       num1 = 0;
       displayContent = 0;
       operandPressed = false;
+      operandCount = 0;
+      calcArray = [];
       refreshDisplay();
       return;
     }
 
     // Register operand event.
-    operandPressed = true;
+    if (displayContent == '0') return; // Operating on 0 not needed.
 
+    operandPressed = true;
+    num1 = parseFloat(displayContent);
     currentOperand = keyPress;
 
-    num1 = parseFloat(displayContent);
+    // Push current display number and operand to respective calculation arrays.
+    calcArray.push(num1);
+    calcArray.push(currentOperand);
   });
 }
