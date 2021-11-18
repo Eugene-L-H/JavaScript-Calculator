@@ -21,6 +21,9 @@ let operandPressed = false;
 // Used for clearing the screen after operator pushed.
 let digitCount = 0;
 
+// Add keyboard functionality
+keyboard();
+
 // Set initial display value;
 refreshDisplay();
 
