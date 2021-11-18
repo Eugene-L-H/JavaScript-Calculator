@@ -2,6 +2,9 @@ const display = document.querySelector('.num-display');
 const numPad = document.querySelector('.num-pad');
 const operators = document.querySelector('.operators');
 
+// Is set to true after a calculation. If true screen + vars will be cleared.
+let calculated = false;
+
 let calcArray = [];
 
 // Float or int total for calcualtion

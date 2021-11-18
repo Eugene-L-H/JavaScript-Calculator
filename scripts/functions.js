@@ -29,11 +29,19 @@ function refreshDisplay() {
   }
 }
 
+// Reset all variables and clear screen.
+function clear() {
+  num1 = 0;
+  num1 = 0;
+  displayContent = 0;
+  operandPressed = false;
+  operandCount = 0;
+  calcArray = [];
+  refreshDisplay();
+}
+
 // Perfom calculation when user presses "equals" and display result.
 function calculate() {
-  // Perform no calculation if no data is present.
-  if (calcArray == []) return;
-
   let userInput = calcArray;
   let total = userInput[0];
 
@@ -59,7 +67,8 @@ function calculate() {
           break;
       }
       displayContent = total;
-      refreshDisplay();
+      refreshDisplay(); // Display result of calculation.
+      calculated = true;
     }
   }
 }

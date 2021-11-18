@@ -2,6 +2,9 @@
 function numPadInputs() {
   // Get class of button clicked on.
   numPad.addEventListener('click', (e) => {
+    // Refresh display  and vars after last calculation.
+    if (calculated) clear();
+
     // Prevent overflow in display area.
     if (digits == 24) return;
 
@@ -51,7 +54,10 @@ function numPadInputs() {
         value = '.';
         break;
       case 'equals':
-        operandPressed = false;
+        // Perform no calculation if no data is present.
+        if (operandPressed && digitCount == 0) return;
+        // Won't caluclate until number pressed after operator.
+        if (calcArray.length == 0) return;
         num1 = parseFloat(displayContent);
         calcArray.push(num1);
         calcArray.push(keyPress);
@@ -102,13 +108,7 @@ function operandInput() {
 
     // Clear display and reset variables.
     if (keyPress == 'clear') {
-      num1 = 0;
-      num1 = 0;
-      displayContent = 0;
-      operandPressed = false;
-      operandCount = 0;
-      calcArray = [];
-      refreshDisplay();
+      clear();
       return;
     }
 
@@ -116,6 +116,7 @@ function operandInput() {
     if (displayContent == '0') return; // Operating on 0 not needed.
 
     operandPressed = true;
+    digitCount = 0;
     num1 = parseFloat(displayContent);
     currentOperand = keyPress;
 

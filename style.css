@@ -98,6 +98,7 @@ body {
 }
 
 .operators {
+  position: absolute;
   display: flex;
   flex-direction: column;
   height: fit-content;
