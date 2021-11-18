@@ -3,7 +3,10 @@ function numPadInputs() {
   // Get class of button clicked on.
   numPad.addEventListener('click', (e) => {
     // Refresh display  and vars after last calculation.
-    if (calculated) clear();
+    if (calculated) {
+      clear();
+      calculated = false; // Will set back to true after next calulation.
+    }
 
     // Prevent overflow in display area.
     if (digits == 24) return;
@@ -56,8 +59,10 @@ function numPadInputs() {
       case 'equals':
         // Perform no calculation if no data is present.
         if (operandPressed && digitCount == 0) return;
+
         // Won't caluclate until number pressed after operator.
         if (calcArray.length == 0) return;
+
         num1 = parseFloat(displayContent);
         calcArray.push(num1);
         calcArray.push(keyPress);
@@ -86,10 +91,16 @@ function numPadInputs() {
 // Governs behavior of operand buttons.
 function operandInput() {
   operators.addEventListener('click', (e) => {
-    // Prevent further operand presses if one has already been pressed.
-    if (operandPressed) return;
     // Get class of button clicked on.
     let keyPress = e.path[0].getAttribute('class');
+
+    // Clear display and reset variables.
+    if (keyPress == 'clear') {
+      clear();
+      return;
+    }
+    // Prevent further operand presses if one has already been pressed.
+    if (operandPressed) return;
 
     // Delete one digit at a time.
     if (keyPress == 'backspace') {
@@ -106,17 +117,13 @@ function operandInput() {
       return;
     }
 
-    // Clear display and reset variables.
-    if (keyPress == 'clear') {
-      clear();
-      return;
-    }
-
     // Register operand event.
     if (displayContent == '0') return; // Operating on 0 not needed.
 
+    // operandPressed must be false before another operand can be registered.
     operandPressed = true;
-    digitCount = 0;
+    digitCount = 0; // User can't input a zero after a operand press.
+
     num1 = parseFloat(displayContent);
     currentOperand = keyPress;
 

@@ -31,12 +31,11 @@ function refreshDisplay() {
 
 // Reset all variables and clear screen.
 function clear() {
-  num1 = 0;
+  calcArray = [];
   num1 = 0;
   displayContent = 0;
   operandPressed = false;
-  operandCount = 0;
-  calcArray = [];
+  digitCount = 0;
   refreshDisplay();
 }
 

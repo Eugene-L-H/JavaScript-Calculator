@@ -45,8 +45,9 @@ body {
   background-color: rgb(150, 150, 1);
   border-top: saddlebrown solid 8px;
   border-left: rgb(167, 110, 56) solid 7px;
-  border-right: rgb(36, 30, 0) solid 2px;
+  border-right: rgb(46, 40, 0) solid 3px;
   border-bottom: black solid 2px;
+  border-radius: 3% 2% 2% 3%;
 }
 
 .signature {
