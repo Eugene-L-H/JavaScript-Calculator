@@ -6,7 +6,6 @@ let calcArray = [];
 
 // Float or int total for calcualtion
 let num1 = 0;
-let num2 = 0;
 let currentOperand = '';
 // What is shown in the display area of the calculator
 let displayContent = '0';
