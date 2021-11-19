@@ -5,6 +5,8 @@ function keyboard() {
 
     // Refresh display  and vars after last calculation.
     if (calculated) {
+      console.log(keyPress);
+      if (keyPress == 'Enter') return;
       clear();
       calculated = false; // Will set back to true after next calulation.
     }
@@ -58,7 +60,6 @@ function keyboard() {
         keyPress = 'six';
         break;
       case '7':
-        88;
         keyPress = 'seven';
         break;
       case '8':

@@ -34,8 +34,8 @@ function clear() {
   calcArray = [];
   num1 = 0;
   operandPressed = false;
-  digitCount = 0;
   displayContent = 0;
+  digitCount = 0;
   refreshDisplay();
 }
 

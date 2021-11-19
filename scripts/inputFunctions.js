@@ -1,9 +1,15 @@
-// Governs behavior of numpad buttons.
-function numPadInputs(funct) {
+// Registers clicks on numPad area and passes them to handler.
+function numPadInputs() {
   // Get class of button clicked on.
   numPad.addEventListener('click', (e) => {
+    // Get value of key clicked.
+    let keyPress = e.path[0].getAttribute('class');
+
     // Refresh display  and vars after last calculation.
     if (calculated) {
+      // No functionality when calculation was just perfomed.
+
+      if (keyPress == 'equals') return;
       clear();
       calculated = false; // Will set back to true after next calulation.
     }
@@ -17,20 +23,11 @@ function numPadInputs(funct) {
       if (digitCount == 1) operandPressed = false;
     }
 
-    let keyPress = e.path[0].getAttribute('class');
     numHandler(keyPress);
   });
 }
-// Registers clicks on operator area and passes them to handler.
-function operandInput() {
-  operators.addEventListener('click', (e) => {
-    // Get class of button clicked on.
-    let keyPress = e.path[0].getAttribute('class');
-    operandHandler(keyPress);
-  });
-}
 
-// Governs behavior of numKey buttons.
+// Governs behavior of numKey buttons after recieving input from keyboard or mouse.
 function numHandler(keyPress) {
   let value = '';
 
@@ -99,6 +96,15 @@ function numHandler(keyPress) {
   }
   operandPressed = false;
   refreshDisplay();
+}
+
+// Registers clicks on operator area and passes them to handler.
+function operandInput() {
+  operators.addEventListener('click', (e) => {
+    // Get class of button clicked on.
+    let keyPress = e.path[0].getAttribute('class');
+    operandHandler(keyPress);
+  });
 }
 
 // Governs behavior of operand buttons.
