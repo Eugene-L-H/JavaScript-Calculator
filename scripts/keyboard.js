@@ -1,15 +1,9 @@
 function keyboard() {
-  document.addEventListener('keypress', (e) => {
+  document.addEventListener('keyup', (e) => {
     // Get value of key pressed.
     let keyPress = e.key;
     console.log(keyPress);
-
-    // Refresh display  and vars after last calculation.
-    if (calculated) {
-      if (keyPress == 'Enter') return;
-      clear();
-      calculated = false; // Will set back to true after next calulation.
-    }
+    console.log(calcArray);
 
     // Prevent overflow in display area.
     if (digits == 24 && keyPress != 'Backspace') return;
@@ -75,6 +69,7 @@ function keyboard() {
         keyPress = 'dot';
         break;
       case 'Enter':
+        if (calculated) return;
         keyPress = 'equals';
         break;
     }

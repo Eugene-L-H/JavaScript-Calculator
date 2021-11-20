@@ -5,14 +5,6 @@ function numPadInputs() {
     // Get value of key clicked.
     let keyPress = e.path[0].getAttribute('class');
 
-    // Refresh display  and vars after last calculation.
-    if (calculated) {
-      // No functionality when calculation was just perfomed.
-      if (keyPress == 'equals') return;
-      clear();
-      calculated = false; // Will set back to true after next calulation.
-    }
-
     // Prevent overflow in display area.
     if (digits == 24) return;
 
@@ -28,6 +20,14 @@ function numPadInputs() {
 
 // Governs behavior of numKey buttons after recieving input from keyboard or mouse.
 function numHandler(keyPress) {
+  // Refresh display  and vars after last calculation.
+  if (calculated) {
+    // No functionality when calculation was just perfomed.
+    if (keyPress == 'equals') return;
+    clear();
+    calculated = false; // Will set back to true after next calulation.
+  }
+
   let value = '';
 
   switch (keyPress) {
@@ -92,10 +92,6 @@ function numHandler(keyPress) {
     displayContent = '';
   }
 
-  // Prevent trailing zeros after decimal point.
-  let lastChar = displayContent.toString().charAt(digits - 1);
-  if (lastChar == 0 && value == '0') return;
-
   digitCount++;
 
   if (operandPressed) {
@@ -120,18 +116,21 @@ function operandInput() {
 function operandHandler(keyPress) {
   // Allow for a decimal point to be added.
   dot = false;
-  // Make new calculation off previous total.
+  // Make new calculation off the previous total.
   if (calculated) {
     calculated = false;
     calcArray.pop();
+    total = 0;
   }
   // Clear display and reset variables.
   if (keyPress == 'clear') {
     clear();
     return;
   }
-  // Prevent further operand presses if one has already been pressed.
-  if (operandPressed) return;
+  // Pop last operand from array to be replaced by current.
+  if (operandPressed) {
+    calcArray.pop();
+  }
 
   // Delete one digit at a time.
   if (keyPress == 'backspace') {

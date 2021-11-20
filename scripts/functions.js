@@ -71,6 +71,10 @@ function calculate() {
     }
     displayContent = total;
     refreshDisplay(); // Display result of calculation.
+    // Clear array and push total to be operated on after screen refresh.
+    calcArray = [];
+    calcArray.push(total);
+    // While calculated is true, next numkey press will refresh screen and vars.
     calculated = true;
   }
 }
