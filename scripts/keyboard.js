@@ -2,8 +2,6 @@ function keyboard() {
   document.addEventListener('keyup', (e) => {
     // Get value of key pressed.
     let keyPress = e.key;
-    console.log(keyPress);
-    console.log(calcArray);
 
     // Prevent overflow in display area.
     if (digits == 24 && keyPress != 'Backspace') return;

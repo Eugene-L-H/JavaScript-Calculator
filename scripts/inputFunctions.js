@@ -92,6 +92,10 @@ function numHandler(keyPress) {
     displayContent = '';
   }
 
+  // Prevent trailing zeros after decimal point.
+  let lastChar = displayContent.toString().charAt(digits - 1);
+  if (lastChar == 0 && value == '0') return;
+
   digitCount++;
 
   if (operandPressed) {
@@ -127,10 +131,9 @@ function operandHandler(keyPress) {
     clear();
     return;
   }
-  // Pop last operand from array to be replaced by current.
-  if (operandPressed) {
-    calcArray.pop();
-  }
+
+  // If a previous operand was pressed another will not be registered
+  if (operandPressed) return;
 
   // Delete one digit at a time.
   if (keyPress == 'backspace') {
@@ -160,6 +163,6 @@ function operandHandler(keyPress) {
   currentOperand = keyPress;
 
   // Push current display number and operand to respective calculation arrays.
-  calcArray.push(num1);
+  if (isNaN(calcArray[calcArray.length])) calcArray.push(num1);
   calcArray.push(currentOperand);
 }
