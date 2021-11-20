@@ -1,12 +1,9 @@
-// Governs behavior of numpad buttons.
-function numPadInputs(funct) {
+// Registers clicks on numPad area and passes them to handler.
+function numPadInputs() {
   // Get class of button clicked on.
   numPad.addEventListener('click', (e) => {
-    // Refresh display  and vars after last calculation.
-    if (calculated) {
-      clear();
-      calculated = false; // Will set back to true after next calulation.
-    }
+    // Get value of key clicked.
+    let keyPress = e.path[0].getAttribute('class');
 
     // Prevent overflow in display area.
     if (digits == 24) return;
@@ -17,21 +14,20 @@ function numPadInputs(funct) {
       if (digitCount == 1) operandPressed = false;
     }
 
-    let keyPress = e.path[0].getAttribute('class');
     numHandler(keyPress);
   });
 }
-// Registers clicks on operator area and passes them to handler.
-function operandInput() {
-  operators.addEventListener('click', (e) => {
-    // Get class of button clicked on.
-    let keyPress = e.path[0].getAttribute('class');
-    operandHandler(keyPress);
-  });
-}
 
-// Governs behavior of numKey buttons.
+// Governs behavior of numKey buttons after recieving input from keyboard or mouse.
 function numHandler(keyPress) {
+  // Refresh display  and vars after last calculation.
+  if (calculated) {
+    // No functionality when calculation was just perfomed.
+    if (keyPress == 'equals') return;
+    clear();
+    calculated = false; // Will set back to true after next calulation.
+  }
+
   let value = '';
 
   switch (keyPress) {
@@ -66,9 +62,10 @@ function numHandler(keyPress) {
       value = '0';
       break;
     case 'dot':
-      // Prevent user from inputting more than one period.
-      if (displayContent.charAt(displayContent.length - 1) == '.') return;
+      // Prevent user from inputting more than one period (dot or decimal).
+      if (dot) return;
       value = '.';
+      dot = true;
       break;
     case 'equals':
       // Perform no calculation if no data is present.
@@ -81,14 +78,23 @@ function numHandler(keyPress) {
       calcArray.push(num1);
       calcArray.push(keyPress);
       calculate();
-      break;
+      return;
   }
 
   // Clear leading zero if there is one. Prevent leading zero after operand press.
-  if (displayContent == '0' || operandPressed) {
-    if (value == '0') return;
+  if (displayContent == '0') {
+    if (value == '0') {
+      displayContent = '0';
+      return;
+    }
+
+    // Clear initial placeholder zero.
     displayContent = '';
   }
+
+  // Prevent trailing zeros after decimal point.
+  let lastChar = displayContent.toString().charAt(digits - 1);
+  if (lastChar == 0 && value == '0') return;
 
   digitCount++;
 
@@ -101,14 +107,32 @@ function numHandler(keyPress) {
   refreshDisplay();
 }
 
+// Registers clicks on operator area and passes them to handler.
+function operandInput() {
+  operators.addEventListener('click', (e) => {
+    // Get class of button clicked on.
+    let keyPress = e.path[0].getAttribute('class');
+    operandHandler(keyPress);
+  });
+}
+
 // Governs behavior of operand buttons.
 function operandHandler(keyPress) {
+  // Allow for a decimal point to be added.
+  dot = false;
+  // Make new calculation off the previous total.
+  if (calculated) {
+    calculated = false;
+    calcArray.pop();
+    total = 0;
+  }
   // Clear display and reset variables.
   if (keyPress == 'clear') {
     clear();
     return;
   }
-  // Prevent further operand presses if one has already been pressed.
+
+  // If a previous operand was pressed another will not be registered
   if (operandPressed) return;
 
   // Delete one digit at a time.
@@ -120,6 +144,8 @@ function operandHandler(keyPress) {
       displayContent = '0';
     } else {
       // Delete single trailing digit.
+      let lastChar = displayContent.toString().charAt(digits - 1);
+      if (lastChar == '.') dot = false;
       displayContent = displayContent.slice(0, -1);
     }
     refreshDisplay();
@@ -137,6 +163,6 @@ function operandHandler(keyPress) {
   currentOperand = keyPress;
 
   // Push current display number and operand to respective calculation arrays.
-  calcArray.push(num1);
+  if (isNaN(calcArray[calcArray.length])) calcArray.push(num1);
   calcArray.push(currentOperand);
 }

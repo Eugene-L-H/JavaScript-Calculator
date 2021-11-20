@@ -3,12 +3,6 @@ function keyboard() {
     // Get value of key pressed.
     let keyPress = e.key;
 
-    // Refresh display  and vars after last calculation.
-    if (calculated) {
-      clear();
-      calculated = false; // Will set back to true after next calulation.
-    }
-
     // Prevent overflow in display area.
     if (digits == 24 && keyPress != 'Backspace') return;
 
@@ -58,7 +52,6 @@ function keyboard() {
         keyPress = 'six';
         break;
       case '7':
-        88;
         keyPress = 'seven';
         break;
       case '8':
@@ -74,6 +67,7 @@ function keyboard() {
         keyPress = 'dot';
         break;
       case 'Enter':
+        if (calculated) return;
         keyPress = 'equals';
         break;
     }

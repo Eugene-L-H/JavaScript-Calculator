@@ -31,11 +31,14 @@ function refreshDisplay() {
 
 // Reset all variables and clear screen.
 function clear() {
+  calculated = false;
   calcArray = [];
   num1 = 0;
-  operandPressed = false;
-  digitCount = 0;
+  currentOperand = '';
   displayContent = 0;
+  dot = false;
+  digits = 0;
+  operandPressed = false;
   refreshDisplay();
 }
 
@@ -65,9 +68,13 @@ function calculate() {
           displayContent = total;
           break;
       }
-      displayContent = total;
-      refreshDisplay(); // Display result of calculation.
-      calculated = true;
     }
+    displayContent = total;
+    refreshDisplay(); // Display result of calculation.
+    // Clear array and push total to be operated on after screen refresh.
+    calcArray = [];
+    calcArray.push(total);
+    // While calculated is true, next numkey press will refresh screen and vars.
+    calculated = true;
   }
 }
