@@ -15,6 +15,9 @@ let currentOperand = '';
 let displayContent = '0';
 let digits = 0;
 
+// Flags if there is a dot (decimal) on the screen.
+let dot = false;
+
 // Display is cleared on next numpad press when true.
 let operandPressed = false;
 

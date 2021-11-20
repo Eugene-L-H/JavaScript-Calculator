@@ -8,7 +8,6 @@ function numPadInputs() {
     // Refresh display  and vars after last calculation.
     if (calculated) {
       // No functionality when calculation was just perfomed.
-
       if (keyPress == 'equals') return;
       clear();
       calculated = false; // Will set back to true after next calulation.
@@ -63,9 +62,10 @@ function numHandler(keyPress) {
       value = '0';
       break;
     case 'dot':
-      // Prevent user from inputting more than one period.
-      if (displayContent.charAt(displayContent.length - 1) == '.') return;
+      // Prevent user from inputting more than one period (dot or decimal).
+      if (dot) return;
       value = '.';
+      dot = true;
       break;
     case 'equals':
       // Perform no calculation if no data is present.
@@ -78,14 +78,23 @@ function numHandler(keyPress) {
       calcArray.push(num1);
       calcArray.push(keyPress);
       calculate();
-      break;
+      return;
   }
 
   // Clear leading zero if there is one. Prevent leading zero after operand press.
-  if (displayContent == '0' || operandPressed) {
-    if (value == '0') return;
+  if (displayContent == '0') {
+    if (value == '0') {
+      displayContent = '0';
+      return;
+    }
+
+    // Clear initial placeholder zero.
     displayContent = '';
   }
+
+  // Prevent trailing zeros after decimal point.
+  let lastChar = displayContent.toString().charAt(digits - 1);
+  if (lastChar == 0 && value == '0') return;
 
   digitCount++;
 
@@ -109,6 +118,13 @@ function operandInput() {
 
 // Governs behavior of operand buttons.
 function operandHandler(keyPress) {
+  // Allow for a decimal point to be added.
+  dot = false;
+  // Make new calculation off previous total.
+  if (calculated) {
+    calculated = false;
+    calcArray.pop();
+  }
   // Clear display and reset variables.
   if (keyPress == 'clear') {
     clear();
@@ -126,6 +142,8 @@ function operandHandler(keyPress) {
       displayContent = '0';
     } else {
       // Delete single trailing digit.
+      let lastChar = displayContent.toString().charAt(digits - 1);
+      if (lastChar == '.') dot = false;
       displayContent = displayContent.slice(0, -1);
     }
     refreshDisplay();

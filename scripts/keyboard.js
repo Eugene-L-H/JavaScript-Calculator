@@ -1,11 +1,11 @@
 function keyboard() {
-  document.addEventListener('keyup', (e) => {
+  document.addEventListener('keypress', (e) => {
     // Get value of key pressed.
     let keyPress = e.key;
+    console.log(keyPress);
 
     // Refresh display  and vars after last calculation.
     if (calculated) {
-      console.log(keyPress);
       if (keyPress == 'Enter') return;
       clear();
       calculated = false; // Will set back to true after next calulation.

@@ -31,11 +31,14 @@ function refreshDisplay() {
 
 // Reset all variables and clear screen.
 function clear() {
+  calculated = false;
   calcArray = [];
   num1 = 0;
-  operandPressed = false;
+  currentOperand = '';
   displayContent = 0;
-  digitCount = 0;
+  dot = false;
+  digits = 0;
+  operandPressed = false;
   refreshDisplay();
 }
 
@@ -65,9 +68,9 @@ function calculate() {
           displayContent = total;
           break;
       }
-      displayContent = total;
-      refreshDisplay(); // Display result of calculation.
-      calculated = true;
     }
+    displayContent = total;
+    refreshDisplay(); // Display result of calculation.
+    calculated = true;
   }
 }
