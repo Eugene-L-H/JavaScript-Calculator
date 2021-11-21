@@ -14,6 +14,7 @@ function numPadInputs() {
       if (digitCount == 1) operandPressed = false;
     }
 
+    // pressed(keyPress);
     numHandler(keyPress);
   });
 }
@@ -113,6 +114,8 @@ function operandInput() {
 
 // Governs behavior of operand buttons.
 function operandHandler(keyPress) {
+  pressed(keyPress);
+
   // Allow for a decimal point to be added.
   dot = false;
   // Make new calculation off the previous total.

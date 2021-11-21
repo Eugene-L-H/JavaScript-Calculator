@@ -1,3 +1,11 @@
+function pressed(keyPress) {
+  const key = document.querySelector(`.${keyPress}`);
+  key.classList.add('pressed');
+  setTimeout(() => {
+    key.classList.remove('pressed');
+  }, 90);
+}
+
 function keyboard() {
   document.addEventListener('keyup', (e) => {
     // Get value of key pressed.
@@ -71,6 +79,8 @@ function keyboard() {
         keyPress = 'equals';
         break;
     }
+    // Animate key-press
+    pressed(keyPress);
     numHandler(keyPress);
   });
 }
