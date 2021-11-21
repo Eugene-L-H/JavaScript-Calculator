@@ -72,7 +72,7 @@ function numHandler(keyPress) {
       if (operandPressed) return;
 
       // Won't caluclate until number pressed after operator.
-      if (calcArray.length == 0) return;
+      if (calcArray.length == 1) return;
 
       num1 = parseFloat(displayContent);
       calcArray.push(num1);
