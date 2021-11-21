@@ -69,10 +69,10 @@ function numHandler(keyPress) {
       break;
     case 'equals':
       // Perform no calculation if no data is present.
-      if (operandPressed && digitCount == 0) return;
+      if (operandPressed) return;
 
       // Won't caluclate until number pressed after operator.
-      if (calcArray.length == 0) return;
+      if (calcArray.length == 1) return;
 
       num1 = parseFloat(displayContent);
       calcArray.push(num1);
@@ -84,17 +84,12 @@ function numHandler(keyPress) {
   // Clear leading zero if there is one. Prevent leading zero after operand press.
   if (displayContent == '0') {
     if (value == '0') {
-      displayContent = '0';
       return;
     }
 
     // Clear initial placeholder zero.
     displayContent = '';
   }
-
-  // Prevent trailing zeros after decimal point.
-  let lastChar = displayContent.toString().charAt(digits - 1);
-  if (lastChar == 0 && value == '0') return;
 
   digitCount++;
 
@@ -144,9 +139,10 @@ function operandHandler(keyPress) {
       displayContent = '0';
     } else {
       // Delete single trailing digit.
-      let lastChar = displayContent.toString().charAt(digits - 1);
+      let dCtoString = displayContent.toString();
+      let lastChar = dCtoString.charAt(digits - 1);
       if (lastChar == '.') dot = false;
-      displayContent = displayContent.slice(0, -1);
+      displayContent = dCtoString.slice(0, -1);
     }
     refreshDisplay();
     return;
