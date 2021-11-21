@@ -80,6 +80,10 @@ body {
   margin: 170px 0 20px 20px;
 }
 
+button {
+  outline: none;
+}
+
 .num-pad > * {
   display: flex;
   align-items: center;
@@ -142,4 +146,11 @@ body {
 /* JS classes*/
 .bump-display {
   margin: 18px 0 0 20px;
+}
+
+.pressed {
+  border-left: black solid px;
+  border-top: black solid 2px;
+  border-right: #767676 solid 2px;
+  border-bottom: #767676 solid 2px;
 }
