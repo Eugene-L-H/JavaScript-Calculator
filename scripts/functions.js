@@ -1,19 +1,12 @@
 // Operator functions.
-function addition(a, b) {
-  return a + b;
-}
+const calculator = (() => {
+  const add = (a, b) => a + b;
+  const sub = (a, b) => a - b;
+  const mult = (a, b) => a * b;
+  const div = (a, b) => a / b;
 
-function subtraction(a, b) {
-  return a - b;
-}
-
-function multiplication(a, b) {
-  return a * b;
-}
-
-function division(a, b) {
-  return a / b;
-}
+  return { add, sub, mult, div };
+})();
 
 // Used each time the display needs to change.
 function refreshDisplay() {
@@ -51,18 +44,19 @@ function calculate() {
     let listItem = userInput[i];
 
     if (typeof listItem == 'string') {
+      let nextNum = userInput[i + 1];
       switch (listItem) {
         case 'addition':
-          total = addition(total, userInput[i + 1]);
+          total = calculator.add(total, nextNum);
           break;
         case 'subtraction':
-          total = subtraction(total, userInput[i + 1]);
+          total = calculator.sub(total, nextNum);
           break;
         case 'multiplication':
-          total = multiplication(total, userInput[i + 1]);
+          total = calculator.mult(total, nextNum);
           break;
         case 'division':
-          total = division(total, userInput[i + 1]);
+          total = calculator.div(total, nextNum);
           break;
         case 'equals':
           displayContent = total;

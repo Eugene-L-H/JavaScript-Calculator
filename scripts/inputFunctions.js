@@ -114,6 +114,7 @@ function operandInput() {
 
 // Governs behavior of operand buttons.
 function operandHandler(keyPress) {
+  // Animate buttons.
   pressed(keyPress);
 
   // Allow for a decimal point to be added.

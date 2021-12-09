@@ -3,7 +3,7 @@ function pressed(keyPress) {
   key.classList.add('pressed');
   setTimeout(() => {
     key.classList.remove('pressed');
-  }, 90);
+  }, 100);
 }
 
 function keyboard() {
@@ -12,7 +12,7 @@ function keyboard() {
     let keyPress = e.key;
 
     // Prevent overflow in display area.
-    if (digits == 24 && keyPress != 'Backspace') return;
+    if (digits == 24 && keyPress != 'Backspace' && keyPress != 'Delete') return;
 
     // Clear screen if operand has just been pushed.
     if (operandPressed) {

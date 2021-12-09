@@ -1,0 +1,89 @@
+@media (max-width: 600px) {
+  .shell {
+    height: 105.3vw;
+    width: 75.3vw;
+    margin: auto;
+  }
+
+  .display {
+    height: 25.9vw;
+    width: 46.05vw;
+    margin: 4.4vw 0 0 4.4vw;
+  }
+
+  .signature {
+    font-size: 2.4vw;
+    margin-top: 1.5vw;
+  }
+
+  .num-display {
+    height: 17.54vw;
+    width: 43.86vw;
+    margin-top: 14vw;
+    margin-left: 5px;
+    font-size: 6vw;
+  }
+
+  .num-pad {
+    gap: 1.1vw;
+    width: 57vw;
+    height: fit-content;
+    margin: 37.28vw 0 4.4vw 4.4vw;
+  }
+
+  .num-pad > * {
+    height: 15.35vw;
+    width: 15.35vw;
+    font-size: 5.26vw;
+    border-radius: 10%;
+  }
+
+  .operators {
+    height: fit-content;
+    width: 15.35vw;
+    gap: 1.1vw;
+    margin: 4.4vw 4.4vw 4.4vw 49.34vw;
+  }
+
+  .operators > * {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 15.35vw;
+    width: 15.35vw;
+    font-size: 5.26vw;
+    margin-left: 7vw;
+    border-radius: 10%;
+    color: #fff;
+    background-color: #444;
+  }
+
+  .backspace {
+    font-size: 6.5vw;
+  }
+
+  .addition,
+  .clear {
+    background-color: slateblue;
+  }
+
+  .addition {
+    font-size: 6.5vw;
+  }
+
+  .subtraction {
+    font-size: 6.5vw;
+  }
+
+  /* JS classes*/
+  .bump-display {
+    margin-top: 20px;
+  }
+
+  .pressed {
+    border-left: black solid 0.5vw;
+    border-top: black solid 0.5vw;
+    border-right: #767676 solid 0.5vw;
+    border-bottom: #767676 solid 0.5vw;
+  }
+}
