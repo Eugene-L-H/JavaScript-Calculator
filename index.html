@@ -12,7 +12,9 @@
     />
     <link rel="stylesheet" href="styles/style.css" />
     <link rel="stylesheet" href="styles/small-screens.css" />
+    <script src="scripts/methods.js" defer></script>
     <script src="scripts/functions.js" defer></script>
+    <script src="scripts/keyboard.js" defer></script>
     <script src="scripts/script.js" defer></script>
     <title>Calculator</title>
   </head>
@@ -33,16 +35,26 @@
         <input type="button" class="eight num-button" value="8" />
         <input type="button" class="nine num-button" value="9" />
         <input type="button" class="zero num-button" value="0" />
-        <input type="button" class="dot op-button" value="." />
+        <input type="button" class="dot" value="." />
         <input type="button" class="equals" value="=" />
       </div>
       <div class="operators">
         <input type="button" class="backspace" value="&larr;" />
         <input type="button" class="clear" value="AC" />
-        <input type="button" class="division op-button" value="/" />
-        <input type="button" class="multiplication op-button" value="X" />
-        <input type="button" class="subtraction op-button" value="-" />
-        <input type="button" class="addition op-button" value="+" />
+        <input type="button" class="division op-button" value="/" name="div" />
+        <input
+          type="button"
+          class="multiplication op-button"
+          name="mult"
+          value="X"
+        />
+        <input
+          type="button"
+          class="subtraction op-button"
+          value="-"
+          name="sub"
+        />
+        <input type="button" class="addition op-button" value="+" name="add" />
       </div>
     </div>
   </body>
