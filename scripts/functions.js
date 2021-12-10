@@ -1,5 +1,4 @@
-// Operator functions.
-const calculator = (() => {
+const processor = (() => {
   const add = (a, b) => a + b;
   const sub = (a, b) => a - b;
   const mult = (a, b) => a * b;
@@ -8,68 +7,55 @@ const calculator = (() => {
   return { add, sub, mult, div };
 })();
 
-// Used each time the display needs to change.
-function refreshDisplay() {
-  // if (operandPressed) displayContent = '';
-  display.textContent = displayContent;
+const memory = (() => {
+  let total = 0;
 
-  // Bump content up to prevent overflow.
-  digits = displayContent.toString().length;
-  if (digits > 12) {
-    display.classList.add('bump-display');
-  } else {
-    display.classList.remove('bump-display');
-  }
+  let displayNum = '0';
+  let digits = 0;
+  let opPress = '';
+
+  return { total, displayNum, digits, opPress };
+})();
+
+function refreshDisplay() {
+  display.innerHTML = memory.displayNum;
 }
 
-// Reset all variables and clear screen.
-function clear() {
-  calculated = false;
-  calcArray = [];
-  num1 = 0;
-  currentOperand = '';
-  displayContent = 0;
-  dot = false;
-  digits = 0;
-  operandPressed = false;
+function numPadDisplay(event) {
+  let keyPress = event.target.value;
+
+  console.log(keyPress);
+
+  if ((keyPress == 0 && memory.displayNum == 0) || memory.digits == 24) {
+    return;
+  } else if (memory.displayNum == 0) {
+    memory.displayNum = '';
+  }
+
+  memory.displayNum += keyPress;
+  memory.digits += 1;
   refreshDisplay();
 }
 
-// Perfom calculation when user presses "equals" and display result.
-function calculate() {
-  let userInput = calcArray;
-  let total = userInput[0];
+function registerOp(event) {
+  let keyPress = event.target.value;
 
-  for (let i = 1; i < userInput.length; i++) {
-    let listItem = userInput[i];
+  memory.opPress = keyPress;
+}
 
-    if (typeof listItem == 'string') {
-      let nextNum = userInput[i + 1];
-      switch (listItem) {
-        case 'addition':
-          total = calculator.add(total, nextNum);
-          break;
-        case 'subtraction':
-          total = calculator.sub(total, nextNum);
-          break;
-        case 'multiplication':
-          total = calculator.mult(total, nextNum);
-          break;
-        case 'division':
-          total = calculator.div(total, nextNum);
-          break;
-        case 'equals':
-          displayContent = total;
-          break;
-      }
-    }
-    refreshDisplay(); // Display result of calculation.
-
-    // Clear array and push total to be operated on after screen refresh.
-    calcArray = [];
-    calcArray.push(total);
-
-    // While calculated is true, next numkey press will refresh screen and vars.
-    calculated = true;
+function backSpace() {
+  if (memory.displayNum == 0) {
+    return;
   }
+  memory.displayNum = memory.displayNum.slice(0, -1);
+  memory.digits -= 1;
+  refreshDisplay();
+}
+
+function clearMemory() {
+  console.log('hi');
+  memory.displayNum = 0;
+  memory.digits = 0;
+  memory.opPress = '';
+  refreshDisplay();
 }

@@ -62,10 +62,14 @@ body {
 }
 
 .num-display {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
   height: 80px;
   width: 200px;
+  word-break: break-all;
   word-wrap: break-word;
-  margin-top: 64px;
+  /* margin-top: 60px; */
   margin-left: 5px;
   font-size: 28px;
   transform: scaleY(1.5);
@@ -81,7 +85,8 @@ body {
   margin: 170px 0 20px 20px;
 }
 
-button {
+.num-pad input,
+.operators input {
   outline: none;
 }
 
@@ -143,9 +148,9 @@ button {
 }
 
 /* JS classes*/
-.bump-display {
-  margin-top: 20px;
-}
+/* .bump-display {
+  margin-bottom: 40px;
+} */
 
 .pressed {
   border-left: black solid 2px;

@@ -1,37 +1,32 @@
 const display = document.querySelector('.num-display');
-const numPad = document.querySelector('.num-pad');
-const operators = document.querySelector('.operators');
+const numPad = document.querySelectorAll('.num-button');
+const operators = document.querySelectorAll('.op-button');
+const backSpaceKey = document.querySelector('.backspace');
+const allClearKey = document.querySelector('.clear');
+const equalsKey = document.querySelector('.equals');
 
-// Is set to true after a calculation. If true screen + vars will be cleared.
-let calculated = false;
+// Store pressed numbers in calcualtor memory.
+for (let i = 0; i < numPad.length; i++) {
+  let key = numPad[i];
 
-let calcArray = [];
+  key.addEventListener('click', (e) => {
+    numPadDisplay(e);
+  });
+}
 
-// Float or int total for calcualtion
-let num1 = 0;
-let currentOperand = '';
+// Store pressed operator in calculator memory.
+for (let i = 0; i < operators.length; i++) {
+  let key = operators[i];
 
-// What is shown in the display area of the calculator
-let displayContent = '0';
-let digits = 0;
+  key.addEventListener('click', (e) => {
+    registerOp(e);
+  });
+}
 
-// Flags if there is a dot (decimal) on the screen.
-let dot = false;
+backSpaceKey.addEventListener('click', () => {
+  backSpace();
+});
 
-// Display is cleared on next numpad press when true.
-let operandPressed = false;
-
-// Used for clearing the screen after operator pushed.
-let digitCount = 0;
-
-// Add keyboard functionality
-keyboard();
-
-// Set initial display value;
-refreshDisplay();
-
-// Register numPad inputs.
-numPadInputs();
-
-// Register operand inputs
-operandInput();
+allClearKey.addEventListener('click', () => {
+  clearMemory();
+});

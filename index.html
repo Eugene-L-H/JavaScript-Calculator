@@ -13,8 +13,6 @@
     <link rel="stylesheet" href="styles/style.css" />
     <link rel="stylesheet" href="styles/small-screens.css" />
     <script src="scripts/functions.js" defer></script>
-    <script src="scripts/keyboard.js" defer></script>
-    <script src="scripts/inputFunctions.js" defer></script>
     <script src="scripts/script.js" defer></script>
     <title>Calculator</title>
   </head>
@@ -22,29 +20,29 @@
     <div class="shell">
       <div class="display">
         <div class="signature">A project developed by Eugene 2021</div>
-        <div class="num-display bump-display"></div>
+        <div class="num-display">0</div>
       </div>
       <div class="num-pad">
-        <button type="button" class="one">1</button>
-        <button type="button" class="two">2</button>
-        <button type="button" class="three">3</button>
-        <button type="button" class="four">4</button>
-        <button type="button" class="five">5</button>
-        <button type="button" class="six">6</button>
-        <button type="button" class="seven">7</button>
-        <button type="button" class="eight">8</button>
-        <button type="button" class="nine">9</button>
-        <button type="button" class="zero">0</button>
-        <button type="button" class="dot">.</button>
-        <button type="button" class="equals">=</button>
+        <input type="button" class="one num-button" value="1" />
+        <input type="button" class="two num-button" value="2" />
+        <input type="button" class="three num-button" value="3" />
+        <input type="button" class="four num-button" value="4" />
+        <input type="button" class="five num-button" value="5" />
+        <input type="button" class="six num-button" value="6" />
+        <input type="button" class="seven num-button" value="7" />
+        <input type="button" class="eight num-button" value="8" />
+        <input type="button" class="nine num-button" value="9" />
+        <input type="button" class="zero num-button" value="0" />
+        <input type="button" class="dot op-button" value="." />
+        <input type="button" class="equals" value="=" />
       </div>
       <div class="operators">
-        <button type="button" class="backspace">&larr;</button>
-        <button type="button" class="clear">AC</button>
-        <button type="button" class="division">%</button>
-        <button type="button" class="multiplication">X</button>
-        <button type="button" class="subtraction">-</button>
-        <button type="button" class="addition">+</button>
+        <input type="button" class="backspace" value="&larr;" />
+        <input type="button" class="clear" value="AC" />
+        <input type="button" class="division op-button" value="/" />
+        <input type="button" class="multiplication op-button" value="X" />
+        <input type="button" class="subtraction op-button" value="-" />
+        <input type="button" class="addition op-button" value="+" />
       </div>
     </div>
   </body>
