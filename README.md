@@ -24,4 +24,3 @@ links directly to my lack of planning ahead at the beginning of the project.
 Switch statements look messy.
 
 I will be spending more time and energy in the planning stage on projects to come.
-S
